@@ -1,13 +1,13 @@
 package bio.chemistry.Protein.aminoacids
 
-import bio.chemistry.Protein.AminoAcidCode
+import bio.chemistry.Protein.{AminoAcidCode, ProteinogenicAminoAcid}
 import bio.chemistry.Protein.aminoacids.classes.charge.Uncharged
 import bio.chemistry.Protein.aminoacids.classes.chemical.Aliphatic
 import bio.chemistry.Protein.aminoacids.classes.hydrogenInteraction.HydrogenNoInteraction
 import bio.chemistry.Protein.aminoacids.classes.hydropathy.Hydrophobic
 import bio.chemistry.Protein.aminoacids.classes.polarity.NonPolar
 
-class A
+case object A
     extends Uncharged
     with Aliphatic
     with HydrogenNoInteraction

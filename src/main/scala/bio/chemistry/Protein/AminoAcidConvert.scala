@@ -27,7 +27,7 @@ object AminoAcidConvert extends StringConverter[AminoAcidCode] {
       case 'U' => U
       case 'G' => G
       case 'P' => P
-      case 'A' => A.apply
+      case 'A' => A
       case 'I' => I
       case 'L' => L
       case 'M' => M
