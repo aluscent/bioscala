@@ -8,7 +8,7 @@ import bio.nucleotide.DNA.NTSymbol
  * most open implementation with the purpose of storing codons and their
  * amino acids in matching alignments.
  */
-case class Codon(aa: AminoAcid, codon: List[NTSymbol]) extends CodonSymbol {
+case class Codon(aa: AminoAcidCode, codon: List[NTSymbol]) extends CodonSymbol {
   val getAminoAcid: AASymbol = aa
   val getCodon: List[NTSymbol] = codon
 }

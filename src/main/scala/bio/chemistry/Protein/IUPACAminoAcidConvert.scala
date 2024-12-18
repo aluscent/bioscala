@@ -1,19 +1,19 @@
 package bio.chemistry.Protein
 
-object IUPACAminoAcidConvert extends StringConverter[AminoAcid] {
-  /** Create a IUPAC object from its character representation.
-   */
-  def fromChar(c: Char): AminoAcid = {
+import bio.chemistry.Protein.aminoacids.iupac.{B, Z, X}
+
+object IUPACAminoAcidConvert extends StringConverter[AminoAcidCode] {
+  /** Create a IUPAC object from its character representation. */
+  def fromChar(c: Char): AminoAcidCode = {
     c.toUpper match {
       case 'B' => B
       case 'Z' => Z
       case 'X' => X
-      case _ =>
-        AminoAcidConvert.fromChar(c)
+      case _ => AminoAcidConvert.fromChar(c)
     }
   }
 
-  def fromItem(i: AminoAcid): AminoAcid = {
+  def fromItem(i: AminoAcidCode): AminoAcidCode = {
     i match {
       case B => B
       case Z => Z

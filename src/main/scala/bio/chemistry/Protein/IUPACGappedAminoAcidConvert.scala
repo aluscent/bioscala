@@ -1,6 +1,7 @@
 package bio.chemistry.Protein
 
 import bio.chemistry.Protein
+import bio.chemistry.Protein.aminoacids.iupac.{B, Z, X}
 
 object IUPACGappedAminoAcidConvert extends StringConverter[AASymbol] {
   /** Create a IUPAC object from its character representation.
