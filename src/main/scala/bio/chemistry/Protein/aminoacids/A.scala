@@ -1,6 +1,5 @@
 package bio.chemistry.Protein.aminoacids
 
-import bio.chemistry.Protein.{AminoAcidCode, ProteinogenicAminoAcid}
 import bio.chemistry.Protein.aminoacids.classes.charge.Uncharged
 import bio.chemistry.Protein.aminoacids.classes.chemical.Aliphatic
 import bio.chemistry.Protein.aminoacids.classes.hydrogenInteraction.HydrogenNoInteraction

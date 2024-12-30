@@ -1,6 +1,6 @@
 package bio.chemistry.Protein
 
-import bio.chemistry.Protein.aminoacids.{A, C, D, E, F, G, H, I, K, L, M, N, P, Q, R, S, T, U, V, W, Y}
+import bio.chemistry.Protein.aminoacids._
 
 object AminoAcidConvert extends StringConverter[AminoAcidCode] {
 
