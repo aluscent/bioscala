@@ -2,7 +2,7 @@ package bio.attribute
 
 /**
  * Attributes are properties of Nucleotides, Sequences, Alignments etc.
- * For a Sequence there maybe a ID attribute, descriptions, features,
+ * For a Sequence there maybe attributes of ID, descriptions, features,
  * annotations, etc.
  *
  * Each attribute implements listeners, to messages they respond to. A

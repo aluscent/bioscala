@@ -2,7 +2,7 @@ import bio.sequence.DNA
 import bio.nucleotide.DNA.NTSymbol
 import bio.alignment.Alignment
 import bio.chemistry.DNA.Gap
-import bio.db.fasta.FastaReader
+import bio.db.fasta.FASTAReader
 
 import scala.annotation.tailrec
 
@@ -58,7 +58,7 @@ Call SNPs from an alignment.
       list match {
         case Nil => map
         case "--help" :: tail => nextOption(map, tail)
-        case "-v" :: tail => nextOption(map ++ Map('verbose -> true), tail)
+        case "-v" :: tail => nextOption(map ++ Map(Symbol("verbose") -> true), tail)
         case string :: opt2 :: _ if switch(opt2) =>
           nextOption(map ++ infileOption(map, string), list.tail)
         case string :: Nil => nextOption(map ++ infileOption(map, string), list.tail)
@@ -83,7 +83,7 @@ Call SNPs from an alignment.
         case None => false
       }
 
-    val verbose = getBool('verbose)
+    val verbose = getBool(Symbol("verbose"))
     println(cname + " " + version)
 
     // ==== Start processing
@@ -91,10 +91,10 @@ Call SNPs from an alignment.
       case Some(l: List[String]) =>
         l.reverse.foreach { infilen =>
           if (verbose) println("Reading " + infilen)
-          val f = new FastaReader(infilen)
-          val seqs = f.map {
-            case (id, tag, symbols) =>
-              DNA.GappedSequence(id, tag, symbols)
+          val f = FASTAReader(infilen)
+          val seqs = f.getAllSequences.map {
+            case (tag, symbols) =>
+              DNA.GappedSequence(tag.drop(1).trim.split(Array(' ', '\t'))(0), tag, symbols.seq.mkString)
           }.toList
           val ids = seqs.map {
             _.id
