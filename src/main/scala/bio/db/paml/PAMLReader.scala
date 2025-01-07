@@ -1,8 +1,15 @@
 package bio.db.paml
 
 import java.io.{BufferedReader, FileReader}
+import java.io.IOException
+import java.nio.MappedByteBuffer
+import java.nio.channels.FileChannel
+import java.nio.file.Paths
+import java.nio.file.StandardOpenOption
+import java.util
+import scala.jdk.CollectionConverters._
 
-/** PamlReader opens a file and parses the PAML PHYLIP CODON contents using an
+/** PAMLReader opens a file and parses the PAML PHYLIP CODON contents using an
   * iterator. Rather than using BioJava's PHYLIPReader, which only allows 9
   * char tags, we roll our own as PAML is more relaxed on the tag. PAML wants
   * more than 2 spaces after the ID. Essentially it is a simple format, where
@@ -10,7 +17,7 @@ import java.io.{BufferedReader, FileReader}
   *
   * Note: no support for interleaved files
   */
-class PamlReader(val filename: String) extends Iterator[(String, String)] {
+class PAMLReader(val filename: String) extends Iterator[(String, String)] {
   private val reader = new BufferedReader(new FileReader(filename))
 
   class PamlReadException(string: String) extends Exception(string)
@@ -50,4 +57,41 @@ class PamlReader(val filename: String) extends Iterator[(String, String)] {
     } while (true)
     null // never reached code
   }
+}
+
+class ModernPAMLReader(filePath: String) {
+  private val fileChannel = FileChannel.open(Paths.get(filePath), StandardOpenOption.READ)
+  private val buffer = fileChannel.map(FileChannel.MapMode.READ_ONLY, 0, fileChannel.size())
+
+  private def sequenceList: util.HashSet[StringBuilder] = {
+//    val sampler = Array.fill[Byte](256)(0)
+    var sb = new StringBuilder()
+    val sl = new util.HashSet[StringBuilder]()
+    while (buffer.hasRemaining) {
+      val ba = buffer.get().toChar
+      if (ba == '\n') {
+        sb.append(ba)
+        sl.add(sb)
+        sb = new StringBuilder()
+      } else sb.append(ba)
+    }
+
+    sl
+  }
+
+  def parseFile(): util.HashMap[String, StringBuilder] = {
+    val hm = new util.HashMap[String, StringBuilder]()
+    println("Sequences: " + sequenceList)
+
+    sequenceList.stream().toList.asScala
+      .map { ch =>
+        val (tag, seq) = ch.splitAt(ch.indexWhere(_ == ' '))
+        println(s"Tag: ${tag.mkString}\n$seq")
+        hm.put(tag.mkString, seq)
+      }
+
+    hm
+  }
+
+  def close(): Unit = fileChannel.close()
 }

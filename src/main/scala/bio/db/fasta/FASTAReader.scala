@@ -22,12 +22,13 @@ import java.io.{BufferedReader, FileReader}
   * removed or replaced by appropriate letter codes (e.g., N for unknown
   * nucleic acid residue or X for unknown amino acid residue).
   */
-class FASTAReader(filePath: String, tokensType: String)
-  extends RichStreamReader(new BufferedReader(new FileReader(filePath)),
+class FASTAReader(filePath: String, tokensType: String) {
+  private val rsr = new RichStreamReader(
+    new BufferedReader(new FileReader(filePath)),
     new FastaFormat(),
     AlphabetManager.alphabetForName(tokensType).getTokenization("token"),
     RichSequenceBuilderFactory.FACTORY,
-    RichObjectFactory.getDefaultNamespace) {
+    RichObjectFactory.getDefaultNamespace)
 
   private case class FASTARichSequence(tag: String, rs: RichSequence) {
     lazy val toBioScalaSequence: Sequence[_] = tokensType match {
@@ -37,7 +38,7 @@ class FASTAReader(filePath: String, tokensType: String)
     }
   }
 
-  private lazy val sequenceList: LazyList[FASTARichSequence] = LazyList.unfold(this) { s =>
+  private lazy val sequenceList: LazyList[FASTARichSequence] = LazyList.unfold(rsr) { s =>
     if (s.hasNext) {
       val next = s.nextRichSequence()
       Some(FASTARichSequence(next.getName, next) -> s)
@@ -56,8 +57,8 @@ class FASTAReader(filePath: String, tokensType: String)
       sequenceList.slice(index, index + 1).head.toBioScalaSequence
     else throw new ArrayIndexOutOfBoundsException()
 
-  def getSequenceByTag(tag: String): FASTARichSequence =
-    sequenceList.filter(_.tag == tag).head
+  def getSequenceByTag(tag: String): Sequence[_] =
+    sequenceList.filter(_.tag == tag).head.toBioScalaSequence
 }
 
 object FASTAReader {
