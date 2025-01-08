@@ -1,8 +1,8 @@
 package bio.sequence.Protein
 
-import bio.DNA
+import bio.nucleotide.DNA.NTSymbol
 import bio.sequence.DNA.{ToDNA, ToSequence}
-import bio.Protein.{AminoAcid, Codon}
+import bio.chemistry.Protein.{AminoAcid, Codon}
 
 object DNAtoCodon {
   /** Return the Codons */
@@ -11,7 +11,7 @@ object DNAtoCodon {
      * a list of codons - gaps (triple dashes) are merely passed
      * on as codons
      */
-    def codons(seq: Seq[DNA.NTSymbol]): Seq[Seq[DNA.NTSymbol]] =
+    def codons(seq: Seq[NTSymbol]): Seq[Seq[NTSymbol]] =
       seq.grouped(3).toSeq
 
     // Amino acids and nucleotides
@@ -23,7 +23,6 @@ object DNAtoCodon {
     // Return a list of Codon objects
     zipped.map { z =>
       val (aa, seq3) = z
-      // println(seq3)
       aa match {
         case aa: AminoAcid => Codon(aa, seq3.toList)
         case _             => throw new IllegalArgumentException("Unexpected value " + aa)

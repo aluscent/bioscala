@@ -2,10 +2,10 @@ package bio.sequence.DNA
 
 import bio.Attribute
 import bio.attribute.{Description, Id}
-import bio.DNA.GappedConvert
-import bio.Protein.AASymbol
-import bio.DNA.NTSymbol
-import bio.RNA.SymbolConvert
+import bio.chemistry.DNA.GappedConvert
+import bio.chemistry.Protein.AASymbol
+import bio.nucleotide.DNA.NTSymbol
+import bio.nucleotide.RNA.SymbolConvert
 import bio.sequence.{RNA, Sequence}
 import bio.sequence.actions.SymbolSequenceTranscription
 

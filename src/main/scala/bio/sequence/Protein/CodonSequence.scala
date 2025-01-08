@@ -1,8 +1,10 @@
 package bio.sequence.Protein
 
 import bio.attribute.{Description, Id}
-import bio.Protein.{AminoAcid, Codon}
-import bio.{Attribute, DNA, RNA}
+import bio.chemistry.Protein.{AminoAcid, Codon}
+import bio.Attribute
+import bio.nucleotide.DNA.{NTSymbol => DNANTSymbol}
+import bio.nucleotide.RNA.{NTSymbol => RNANTSymbol}
 
 /** Store a list of Codon AminoAcids with their Codon sequences. The sequence is
   * initialized from the DNA sequence, before translation. For example
@@ -19,13 +21,13 @@ class CodonSequence(codonList: List[Codon], attributeList: List[Attribute])
   def create(seqList: List[Codon], attributeList: List[Attribute]) =
     new CodonSequence(seqList, attributeList)
 
-  def getCodon(n: Int): List[DNA.NTSymbol] = seq(n).getCodon
+  def getCodon(n: Int): List[DNANTSymbol] = seq(n).getCodon
 
   def toAminoAcid: List[AminoAcid] = seq.map { codon => codon.aa }
 
-  def toDNA: List[DNA.NTSymbol] = seq.flatMap { codon => codon.getCodon }
+  def toDNA: List[DNANTSymbol] = seq.flatMap { codon => codon.getCodon }
 
-  def toRNA: List[RNA.NTSymbol] = bio.sequence.DNA.IUPACSequence(toDNA).transcribe.toList
+  def toRNA: List[RNANTSymbol] = bio.sequence.DNA.IUPACSequence(toDNA).transcribe.toList
 
   override def toString: String = toAminoAcid.mkString
 }

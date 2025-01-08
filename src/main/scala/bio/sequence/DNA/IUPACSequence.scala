@@ -1,10 +1,10 @@
 package bio.sequence.DNA
 
 import bio.Attribute
-import bio.DNA.NTSymbol
+import bio.nucleotide.DNA.NTSymbol
 import bio.attribute.{Description, Id}
-import bio.DNA.IUPACNucleotideConvert
-import bio.Protein.AASymbol
+import bio.chemistry.DNA.IUPACNucleotideConvert
+import bio.chemistry.Protein.AASymbol
 import bio.sequence.{RNA, Sequence}
 import bio.sequence.actions.SymbolSequenceTranscription
 

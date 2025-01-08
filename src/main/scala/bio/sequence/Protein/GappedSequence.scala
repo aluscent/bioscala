@@ -1,8 +1,7 @@
 package bio.sequence.Protein
 
-import bio.Protein.GappedConvert
 import bio.attribute.{Description, Id}
-import bio.Protein.AASymbol
+import bio.chemistry.Protein.{AASymbol, GappedConvert}
 import bio.{Attribute, sequence}
 
 class GappedSequence(seqList: List[AASymbol], attributeList: List[Attribute])

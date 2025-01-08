@@ -3,8 +3,11 @@ package bio.sequence.DNA
 import bio.Attribute
 import bio.sequence.actions.{SequenceTranscription, SequenceTranslation}
 import bio.attribute.{Description, Id}
+import bio.chemistry.Protein.AASymbol
 import bio.sequence.RNA.RNASequence
 import bio.sequence.Sequence
+import bio.nucleotide.DNA.{NucleotideConvert => DNANucleotideConvert, Nucleotide => DNANucleotide}
+import bio.nucleotide.RNA.{NucleotideConvert => RNANucleotideConvert, Nucleotide => RNANucleotide}
 
 /**
  * The (immutable) Nucleotide sequence class represents a list of DNA, or RNA,
@@ -23,45 +26,45 @@ import bio.sequence.Sequence
  * @see GappedSequence
  * @see IUPACSequence
  */
-class DNASequence(nucleotideList: List[bio.DNA.Nucleotide],
+class DNASequence(nucleotideList: List[DNANucleotide],
                   attributeList: List[Attribute])
-    extends Sequence[bio.DNA.Nucleotide](nucleotideList, attributeList) {
+    extends Sequence[DNANucleotide](nucleotideList, attributeList) {
 
   type SequenceType = DNASequence
 
-  def create(seqList: List[bio.DNA.Nucleotide], attributeList: List[Attribute]) =
+  def create(seqList: List[DNANucleotide], attributeList: List[Attribute]) =
     new DNASequence(seqList, attributeList)
 
-  def translate(): List[bio.Protein.AASymbol] =
-    new SequenceTranslation[bio.RNA.Nucleotide].translate(transcribe.seq)
+  def translate(): List[AASymbol] =
+    new SequenceTranslation[RNANucleotide].translate(transcribe.seq)
 
   /**
     * @return transcribed DNA.Sequence as RNA.Sequence
     */
   def transcribe: RNASequence = {
     val transcribed = SequenceTranscription.transcribe(seq)
-    val list = bio.RNA.NucleotideConvert.fromList(transcribed)
+    val list = RNANucleotideConvert.fromList(transcribed)
     RNASequence(list)
   }
 
   /**
     * @return complementary DNA.Sequence
     */
-  def complement: List[bio.DNA.Nucleotide] = SequenceTranscription.complement(seq)
+  def complement: List[DNANucleotide] = SequenceTranscription.complement(seq)
 }
 
 object DNASequence {
-  def apply(list: List[bio.DNA.Nucleotide]) =
-    new DNASequence(bio.DNA.NucleotideConvert.fromList(list), Nil)
+  def apply(list: List[DNANucleotide]) =
+    new DNASequence(DNANucleotideConvert.fromList(list), Nil)
 
   def apply(str: String) =
-    new DNASequence(bio.DNA.NucleotideConvert.fromString(str), Nil)
+    new DNASequence(DNANucleotideConvert.fromString(str), Nil)
 
   def apply(id: String, str: String) =
-    new DNASequence(bio.DNA.NucleotideConvert.fromString(str), List(Id(id)))
+    new DNASequence(DNANucleotideConvert.fromString(str), List(Id(id)))
 
   def apply(id: String, descr: String, str: String) =
-    new DNASequence(bio.DNA.NucleotideConvert.fromString(str),
+    new DNASequence(DNANucleotideConvert.fromString(str),
                     List(Id(id), Description(descr)))
 
   def apply(sequence: DNASequence) = new DNASequence(sequence.seq, Nil)

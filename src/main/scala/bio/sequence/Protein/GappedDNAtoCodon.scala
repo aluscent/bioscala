@@ -1,9 +1,8 @@
 package bio.sequence.Protein
 
-import bio.DNA
 import bio.sequence.DNA.{ToGappedDNA, ToGappedSequence}
-import bio.Protein.Gap
-import bio.Protein.{AminoAcid, Codon, CodonGap, CodonSymbol}
+import bio.chemistry.Protein.{AminoAcid, Codon, CodonGap, CodonSymbol, Gap}
+import bio.nucleotide.DNA.{NTSymbol => DNANTSymbol}
 
 object GappedDNAtoCodon {
   /** Return the Codons */
@@ -12,7 +11,7 @@ object GappedDNAtoCodon {
      * a list of codons - gaps (triple dashes) are merely passed
      * on as codons
      */
-    def codons(seq: List[DNA.NTSymbol]): List[List[DNA.NTSymbol]] = {
+    def codons(seq: List[DNANTSymbol]): List[List[DNANTSymbol]] = {
       val (codon, rest) = seq.splitAt(3)
       codon match {
         case Nil => Nil

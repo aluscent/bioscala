@@ -25,6 +25,8 @@ abstract class Attribute {
 
 package attribute {
 
+  import bio.nucleotide.DNA.NTSymbol
+
   // ==== Message
   case object GetId extends Message
 
@@ -80,11 +82,11 @@ package attribute {
   case class Description(str: String) extends StringAttribute(str, GetDescription)
 
   /** Codon responds to the GetCodon message */
-  case class Codon(seq: List[DNA.NTSymbol]) extends Attribute {
+  case class Codon(seq: List[NTSymbol]) extends Attribute {
 
     override def toString: String = seq.mkString
 
-    override def send(msg: Message): (StatusMessage, List[DNA.NTSymbol]) = {
+    override def send(msg: Message): (StatusMessage, List[NTSymbol]) = {
       msg match {
         case `GetCodon` => (Ok, seq)
         case _ => (UnknownMessage, seq)

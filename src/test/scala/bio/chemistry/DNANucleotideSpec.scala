@@ -2,11 +2,11 @@ package bio.chemistry
 
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
+import bio.nucleotide.DNA.{Nucleotide, A, C, G, T}
 
 import scala.language.postfixOps
 
 class DNANucleotideSpec extends AnyFlatSpec with Matchers {
-  import bio.DNA._
 
   "DNA nucleotides" should "print as characters" in {
     val a = A

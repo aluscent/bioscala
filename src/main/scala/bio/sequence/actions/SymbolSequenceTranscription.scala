@@ -1,7 +1,7 @@
 package bio.sequence.actions
 
-import bio.{DNA, RNA}
-import bio.{DNA => DNAChemistry, RNA => RNAChemistry}
+import bio.nucleotide.{DNA, RNA}
+import bio.chemistry.{DNA => DNAChemistry, RNA => RNAChemistry}
 
 object SymbolSequenceTranscription {
 

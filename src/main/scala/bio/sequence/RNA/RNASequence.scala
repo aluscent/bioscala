@@ -1,9 +1,9 @@
 package bio.sequence.RNA
 
 import bio.Attribute
-import bio.RNA.{Nucleotide, NucleotideConvert}
+import bio.nucleotide.RNA.{Nucleotide, NucleotideConvert}
 import bio.attribute.{Description, Id}
-import bio.Protein.AASymbol
+import bio.chemistry.Protein.AASymbol
 
 /**
  * The (immutable) Nucleotide sequence class represents a list of DNA, or RNA,

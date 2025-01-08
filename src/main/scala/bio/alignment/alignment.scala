@@ -36,6 +36,9 @@ class SequenceAlignment[Sequence](sequencelist: List[Sequence]) {
 }
 
 package DNA {
+  import bio.nucleotide.DNA.NTSymbol
+  import bio.chemistry.DNA.Gap
+
   object SparseAlignment extends SparseAlignment[NTSymbol] {
     type GapType = Gap
     val gap: Gap = Gap

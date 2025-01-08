@@ -1,7 +1,7 @@
 package bio.sequence.DNA
 
-import bio.DNA.{NTSymbol, T}
-import bio.DNA.IUPACNucleotideConvert
+import bio.nucleotide.DNA.{NTSymbol, T}
+import bio.chemistry.DNA.IUPACNucleotideConvert
 
 object ToDNA {
   def apply(str: String): List[NTSymbol] = {

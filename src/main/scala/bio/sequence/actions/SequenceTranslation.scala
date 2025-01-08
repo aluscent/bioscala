@@ -1,8 +1,7 @@
 package bio.sequence.actions
 
 import org.biojava.bio.seq.RNATools
-import bio.Protein.IUPACGappedConvert
-import bio.Protein.AASymbol
+import bio.chemistry.Protein.{IUPACGappedConvert, AASymbol}
 
 /** Sequence translation is a trait.
  */

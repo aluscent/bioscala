@@ -1,10 +1,10 @@
 package bio.sequence.RNA
 
 import bio.Attribute
-import bio.RNA.NTSymbol
+import bio.nucleotide.RNA.NTSymbol
 import bio.attribute.{Description, Id}
-import bio.Protein.AASymbol
-import bio.RNA.GappedConvert
+import bio.chemistry.Protein.AASymbol
+import bio.chemistry.RNA.GappedConvert
 import bio.sequence.Sequence
 
 class GappedSequence(seqList: List[NTSymbol], attributeList: List[Attribute])

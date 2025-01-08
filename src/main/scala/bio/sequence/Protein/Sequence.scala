@@ -1,7 +1,7 @@
 package bio.sequence.Protein
 
 import bio.attribute.{Description, Id}
-import bio.Protein.{AminoAcid, AminoAcidConvert}
+import bio.chemistry.Protein.{AminoAcid, AminoAcidConvert}
 import bio.{Attribute, sequence}
 
 /** The (immutable) Amino acid sequence class represents a list of Protiein

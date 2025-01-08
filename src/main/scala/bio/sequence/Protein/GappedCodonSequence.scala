@@ -1,9 +1,11 @@
 package bio.sequence.Protein
 
-import bio.DNA.NTSymbol
+import bio.nucleotide.DNA.NTSymbol
 import bio.attribute.{Description, Id}
-import bio.Protein.{AASymbol, CodonSymbol}
-import bio.{Attribute, DNA, RNA}
+import bio.chemistry.Protein.{AASymbol, CodonSymbol}
+import bio.Attribute
+import bio.nucleotide.DNA.{NTSymbol => DNANTSymbol}
+import bio.nucleotide.RNA.{NTSymbol => RNANTSymbol}
 
 class GappedCodonSequence(codonList: List[CodonSymbol], attributeList: List[Attribute])
   extends bio.sequence.Sequence[CodonSymbol](codonList, attributeList) {
@@ -17,9 +19,9 @@ class GappedCodonSequence(codonList: List[CodonSymbol], attributeList: List[Attr
 
   def toAminoAcid: List[AASymbol] = seq.map { codon => codon.getAminoAcid }
 
-  def toDNA: List[DNA.NTSymbol] = seq.flatMap { codon => codon.getCodon }
+  def toDNA: List[DNANTSymbol] = seq.flatMap { codon => codon.getCodon }
 
-  def toRNA: List[RNA.NTSymbol] = bio.sequence.DNA.IUPACGappedSequence(toDNA).transcribe.toList
+  def toRNA: List[RNANTSymbol] = bio.sequence.DNA.IUPACGappedSequence(toDNA).transcribe.toList
 
   override def toString: String = toAminoAcid.mkString
 }

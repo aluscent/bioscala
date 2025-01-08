@@ -1,9 +1,8 @@
 package bio.sequence.Protein
 
-import bio.Attribute
 import bio.attribute.{Description, Id}
-import bio.Protein.{AASymbol, IUPACGappedAminoAcidConvert}
-import bio.sequence
+import bio.chemistry.Protein.{AASymbol, IUPACGappedAminoAcidConvert}
+import bio.{Attribute, sequence}
 
 class IUPACGappedSequence(seqList: List[AASymbol], attributeList: List[Attribute])
     extends sequence.Sequence[AASymbol](seqList, attributeList) {

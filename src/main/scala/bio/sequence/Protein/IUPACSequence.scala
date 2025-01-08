@@ -1,9 +1,8 @@
 package bio.sequence.Protein
 
-import bio.Attribute
 import bio.attribute.{Description, Id}
-import bio.Protein.{AminoAcid, IUPACAminoAcidConvert}
-import bio.sequence
+import bio.chemistry.Protein.{AminoAcid, IUPACAminoAcidConvert}
+import bio.{Attribute, sequence}
 
 /** AminoAcid Sequence supporting ambiguous IUPAC symbols
   */

@@ -1,9 +1,10 @@
 package bio.sequence.actions
 
+import bio.chemistry.DNA.Gap
+import bio.nucleotide.DNA.{A, C, G, T}
+import bio.sequence.DNA.SegmentizeGappedSequence
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
-import bio.DNA.{A, G, Gap, C, T}
-import bio.sequence.DNA.SegmentizeGappedSequence
 
 class SegmentizeSpec extends AnyFlatSpec with Matchers {
 

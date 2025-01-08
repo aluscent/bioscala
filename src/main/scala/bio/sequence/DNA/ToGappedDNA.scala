@@ -1,7 +1,7 @@
 package bio.sequence.DNA
 
-import bio.DNA.IUPACGappedConvert
-import bio.DNA.{NTSymbol, T}
+import bio.chemistry.DNA.IUPACGappedConvert
+import bio.nucleotide.DNA.{NTSymbol, T}
 
 /**
  * Take a DNA or RNA string and convert it to a DNA nucleotide list -
