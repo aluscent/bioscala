@@ -3,9 +3,9 @@
  *
  */
 
-import bio._
+import bio.{Alignment, FastaReader}
 import bio.sequence.DNA.GappedSequence
-
+import bio.chemistry.DNA.Gap
 import scala.annotation.tailrec
 
 //noinspection ScalaWeakerAccess
@@ -106,7 +106,7 @@ Call SNPs from an alignment.
           val t: List[List[Symbol]] = a.transpose(a.toList)
 
           // and look for SNPs
-          def hasMultipleNucleotides(col: List[Symbol]) = col.toSet.count(_ != DNA.Gap) > 1
+          def hasMultipleNucleotides(col: List[Symbol]) = col.toSet.count(_ != Gap) > 1
 
           val emptyColumn = List.tabulate(ids.size)(_ => '.')
           val colkeep = t map hasMultipleNucleotides

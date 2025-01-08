@@ -4,6 +4,7 @@ import bio._
 import bio.sequence.DNA.{GappedSequence => DNAGappedSequence}
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should._
+import bio.chemistry.DNA.Gap
 
 class AlignmentSpec extends AnyFlatSpec with Matchers {
   "An Alignment" should "instantiate from a list" in {
@@ -25,7 +26,7 @@ class AlignmentSpec extends AnyFlatSpec with Matchers {
     t2(1).mkString should equal("ggg")
 
     // and look for SNPs
-    def hasMultipleNucleotides(col: List[Symbol]) = col.toSet.count(_ != DNA.Gap) > 1
+    def hasMultipleNucleotides(col: List[Symbol]) = col.toSet.count(_ != Gap) > 1
 
     val bools = t map hasMultipleNucleotides
 

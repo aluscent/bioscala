@@ -1,10 +1,10 @@
 package bio.sequence.RNA
 
 import bio.Attribute
-import bio.RNA.NTSymbol
+import bio.nucleotide.RNA.NTSymbol
 import bio.attribute.{Description, Id}
-import bio.Protein.AASymbol
-import bio.RNA.IUPACNucleotideConvert
+import bio.chemistry.Protein.AASymbol
+import bio.chemistry.RNA.IUPACNucleotideConvert
 import bio.sequence.Sequence
 
 class IUPACSequence(seqList: List[NTSymbol], attributeList: List[Attribute])

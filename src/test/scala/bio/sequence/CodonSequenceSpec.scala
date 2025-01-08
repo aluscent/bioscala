@@ -1,6 +1,6 @@
 package bio.sequence
 
-import bio._
+import bio.nucleotide.DNA
 import bio.sequence.Protein.CodonSequence
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
