@@ -1,12 +1,12 @@
 
-import bio.db.fasta.FastaReader
+import bio.db.fasta.FASTAReader
+
 import scala.annotation.tailrec
 
 object GetORFApp {
   val version = "0.01"
 
   def main(args: Array[String]): Unit = {
-    val arglist = args.toList
     if (args.length == 0) {
       println("GetORFs " + version)
       println("""
@@ -30,11 +30,11 @@ Fetch ORFs from a sequence. Sorry, this script is non-functional at the moment.
     type OptionMap = Map[scala.Symbol, Any]
 
     def infileOption(xmap: OptionMap, s: String): OptionMap = {
-      val infiles = xmap.get('infiles) match {
+      val infiles = xmap.get(Symbol("infiles")) match {
         case Some(l: List[String]) => s :: l
         case _ => List(s)
       }
-      Map('infiles -> infiles)
+      Map(Symbol("infiles") -> infiles)
     }
 
     @tailrec
@@ -43,7 +43,7 @@ Fetch ORFs from a sequence. Sorry, this script is non-functional at the moment.
 
       list match {
         case Nil => map
-        case "-v" :: tail => nextOption(map ++ Map('verbose -> true), tail)
+        case "-v" :: tail => nextOption(map ++ Map(Symbol("verbose") -> true), tail)
         case string :: opt2 :: tail if switch(opt2) =>
           nextOption(map ++ infileOption(map, string), list.tail)
         case string :: Nil => nextOption(map ++ infileOption(map, string), list.tail)
@@ -55,7 +55,7 @@ Fetch ORFs from a sequence. Sorry, this script is non-functional at the moment.
       // Map('type -> false)
     }
 
-    val options = nextOption(Map(), arglist)
+    val options = nextOption(Map(), args.toList)
 
     def getInt(name: scala.Symbol, default: Int): Int =
       options.get(name) match {
@@ -69,17 +69,16 @@ Fetch ORFs from a sequence. Sorry, this script is non-functional at the moment.
         case None => false
       }
 
-    val verbose = getBool('verbose)
+    val verbose = getBool(Symbol("verbose"))
     println("GetORFs " + version)
 
-    options.get('infiles) match {
+    options.get(Symbol("infiles")) match {
       case Some(l: List[String]) =>
         l.reverse.map { infilen =>
           if (verbose) println("Reading file ", infilen)
-          val f = new FastaReader(infilen)
-          f.map {
-            case (id, tag, dna) =>
-              println(id)
+          val f = FASTAReader(infilen)
+          f.getAllSequences.map {
+            case (tag, _) => println(tag.drop(1).trim.split(Array(' ', '\t'))(0))
           }
         }
       case _ =>

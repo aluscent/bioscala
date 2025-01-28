@@ -2,15 +2,14 @@ package bio.db.paml
 
 import java.io.{BufferedReader, FileReader}
 
-/**
- * PamlReader opens a file and parses the PAML Phylip CODON contents using an
- * iterator. Rather than using BioJava's PHYLIPReader, which only allows 9
- * char tags, we roll our own as PAML is more relaxed on the tag. PAML wants
- * more than 2 spaces after the ID. Essentially it is a simple format, where
- * you know the size of the sequences - just remove the spaces.
- *
- * Note: no support for interleaved files
- */
+/** PamlReader opens a file and parses the PAML PHYLIP CODON contents using an
+  * iterator. Rather than using BioJava's PHYLIPReader, which only allows 9
+  * char tags, we roll our own as PAML is more relaxed on the tag. PAML wants
+  * more than 2 spaces after the ID. Essentially it is a simple format, where
+  * you know the size of the sequences - just remove the spaces.
+  *
+  * Note: no support for interleaved files
+  */
 class PamlReader(val filename: String) extends Iterator[(String, String)] {
   private val reader = new BufferedReader(new FileReader(filename))
 
@@ -42,7 +41,9 @@ class PamlReader(val filename: String) extends Iterator[(String, String)] {
         return (id.mkString, seq.mkString)
       }
       if (seq.length > seq_size)
-        throw new PamlReadException("Input file problem in " + filename + " with " + id.mkString + " <" + seq.mkString + ">")
+        throw new PamlReadException(
+          "Input file problem in " + filename + " with " + id.mkString + " <" + seq.mkString + ">"
+        )
       if (!reader.ready)
         throw new PamlReadException("EOF problem in " + filename)
       seq = seq ::: reader.readLine.toList

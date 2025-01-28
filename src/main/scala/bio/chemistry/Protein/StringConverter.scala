@@ -10,11 +10,7 @@ abstract class StringConverter[T] {
     */
   def fromItem(i: T): T
 
-  def fromString(s: String): List[T] = s.toList.map {
-    fromChar
-  }
+  def fromString(s: String): List[T] = s.toList.map(fromChar)
 
-  def fromList(list: List[T]): List[T] = list.map {
-    fromItem
-  }
+  def fromList(list: List[T]): List[T] = list.map(fromItem)
 }

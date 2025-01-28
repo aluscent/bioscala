@@ -56,31 +56,31 @@ Sequence objects. So you can create an alternative implementation
 easily. Second, the transcribe method is cleaner - it does not refer
 to Sequence object internals.
 
-== FastaReader ===
+== FASTAReader ===
 
-A similar example is FastaReader. Compare the BioScala implementation
-with the current one in BioJAVA. In BioJAVA the FastaReader takes care
+A similar example is FASTAReader. Compare the BioScala implementation
+with the current one in BioJAVA. In BioJAVA the FASTAReader takes care
 of reading a FASTA file, transforming it to BioJAVA Sequence objects
 in ''memory'', and returns the type automatically (DNA, RNA,
 Protein). It looks very attractive, as it takes care of everything.
 However, it is not a flexible approach.
 
-The BioScala FastaReader, in contrast, does very little. The FASTA
+The BioScala FASTAReader, in contrast, does very little. The FASTA
 file is iterated, returning a Tuple every time. The tuple consists of
 the record ID, description and sequence - as Strings. We can assume
 that is the minimal layout of a FASTA record. Even if we no nothing of
-the content.  The only state contained in the FastaReader object is the file
-handle. You can use the same FastaReader for nucteotides, amino
+the content.  The only state contained in the FASTAReader object is the file
+handle. You can use the same FASTAReader for nucteotides, amino
 acids, alignments, degenerated data etc.
 
-FastaReader makes no real ''assumptions'' on the content of the FASTA
+FASTAReader makes no real ''assumptions'' on the content of the FASTA
 file.  It only split out records, based on lines starting with '>'.
 And it splits out the ID from the description. If you encounter some
 dirty file you can easily clean it up by filtering on the data, before
 passing it into the Sequence object(s). Also it is trivially simple to
-plug in a new implementation of a FastaReader.
+plug in a new implementation of a FASTAReader.
 
-FastaReader does not load everything in memory.
+FASTAReader does not load everything in memory.
 
 * '''BioScala does not read files in memory'''
 

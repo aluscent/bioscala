@@ -35,5 +35,4 @@ class SegmentizeSpec extends AnyFlatSpec with Matchers {
   "SegmentizeGappedSequence" should "handle one gap" in {
     SegmentizeGappedSequence.split(List(Gap)) should equal(List(List(Gap)))
   }
-
 }

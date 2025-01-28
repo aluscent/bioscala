@@ -5,12 +5,10 @@ import bio.sequence.AbstractSequence
 import java.io._
 import scala.annotation.tailrec
 
-/**
- * FastaWriter writes a list of sequences to a file in Fasta format.
- *
- */
-class FastaWriter(val fOut: FileOutputStream) {
-  class FastaWriterException(string: String) extends Exception(string)
+/** FASTAWriter writes a list of sequences to a file in FASTA format.
+  */
+class FASTAWriter(val fOut: FileOutputStream) {
+  class FASTAWriterException(string: String) extends Exception(string)
 
   var sequence_width = 70
 
@@ -18,17 +16,16 @@ class FastaWriter(val fOut: FileOutputStream) {
 
   def this(filen: String) = this(new FileOutputStream(filen))
 
-  /**
-   * Write Fasta Fasta format.
-   *
-   * Example:
-   *
-   * import bio.io.Control._
-   * val tmpfn = File.createTempFile("BioScala-Fasta-",".fa")
-   * using(new FileOutputStream(tmpfn)) { stream =>
-   * new FastaWriter(stream).write(seqList)
-   * }
-   */
+  /** Write FASTA FASTA format.
+    *
+    * Example:
+    *
+    * import bio.io.Control._
+    * val tmpfn = File.createTempFile("BioScala-FASTA-",".fa")
+    * using(new FileOutputStream(tmpfn)) { stream =>
+    * new FASTAWriter(stream).write(seqList)
+    * }
+    */
   def write[T <: AbstractSequence](list: List[T]): Unit = {
     val writer = new OutputStreamWriter(fOut)
     list.foreach { seq =>
