@@ -2,7 +2,7 @@ package bio.sequence.Protein
 
 import bio.nucleotide.DNA
 import bio.sequence.DNA.{ToDNA, ToSequence}
-import bio.chemistry.Protein.{AminoAcid, Codon}
+import bio.chemistry.Protein.{AminoAcidCode, Codon}
 
 object DNAtoCodon {
   /** Return the Codons */
@@ -25,7 +25,7 @@ object DNAtoCodon {
       val (aa, seq3) = z
       // println(seq3)
       aa match {
-        case aa: AminoAcid => Codon(aa, seq3.toList)
+        case aa: AminoAcidCode => Codon(aa, seq3.toList)
         case _             => throw new IllegalArgumentException("Unexpected value " + aa)
       }
     }

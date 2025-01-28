@@ -6,3 +6,4 @@
 - Traitify Attribute support - also, as the attributeList is lazy, we
 	may do away with passing it down the hierarchy
 - Use Property (RDF type), rather then Attribute as a name?
+- Read files efficiently

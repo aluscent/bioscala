@@ -1,8 +1,8 @@
 package bio.chemistry.Protein
 
-import bio.chemistry.Protein.aminoacids.{C, D, E, G, H, K, N, P, Q, R, S, T, U}
+import bio.chemistry.Protein.aminoacids._
 
-object AminoAcidConvert extends StringConverter[AminoAcid] {
+object AminoAcidConvert extends StringConverter[AminoAcidCode] {
 
   /** AminoAcid factory: create a AminoAcid object from its
    * character representation. For example:
@@ -12,7 +12,7 @@ object AminoAcidConvert extends StringConverter[AminoAcid] {
    * val aa = AminoAcidConvert.fromChar('a')
    * </pre>
    */
-  def fromChar(c: Char): AminoAcid = {
+  def fromChar(c: Char): AminoAcidCode = {
     c.toUpper match {
       case 'R' => R
       case 'H' => H
@@ -36,11 +36,11 @@ object AminoAcidConvert extends StringConverter[AminoAcid] {
       case 'Y' => Y
       case 'V' => V
       case '*' => *
-      case _   => throw new IllegalArgumentException("Unexpected value for AminoAcid " + c)
+      case _   => throw new IllegalArgumentException("Unexpected value for AminoAcidCode " + c)
     }
   }
 
-  def fromItem(i: AminoAcid): AminoAcid = {
+  def fromItem(i: AminoAcidCode): AminoAcidCode = {
     i match {
       case R => R
       case H => H
@@ -66,7 +66,7 @@ object AminoAcidConvert extends StringConverter[AminoAcid] {
       case * => *
       case _ =>
         throw new IllegalArgumentException(
-          "Can not construct AminoAcid from unknown " + i + " type (should be AminoAcid) " + i.getClass.getName
+          "Can not construct AminoAcidCode from unknown " + i + " type (should be AminoAcidCode) " + i.getClass.getName
         )
     }
   }

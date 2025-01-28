@@ -1,7 +1,7 @@
 package bio.sequence.Protein
 
 import bio.attribute.{Attribute, Description, Id}
-import bio.chemistry.Protein.{AminoAcid, Codon}
+import bio.chemistry.Protein.{AminoAcidCode, Codon}
 import bio.nucleotide.{DNA, RNA}
 import bio.sequence.Sequence
 
@@ -22,7 +22,7 @@ class CodonSequence(codonList: List[Codon], attributeList: List[Attribute])
 
   def getCodon(n: Int): List[DNA.NTSymbol] = seq(n).getCodon
 
-  def toAminoAcid: List[AminoAcid] = seq.map { codon => codon.aa }
+  def toAminoAcid: List[AminoAcidCode] = seq.map { codon => codon.aa }
 
   def toDNA: List[DNA.NTSymbol] = seq.flatMap { codon => codon.getCodon }
 

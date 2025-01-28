@@ -1,7 +1,7 @@
 package bio.sequence.Protein
 
 import bio.attribute.{Attribute, Description, Id}
-import bio.chemistry.Protein.{AminoAcid, AminoAcidConvert}
+import bio.chemistry.Protein.{AminoAcidCode, AminoAcidConvert}
 import bio.sequence
 
 /** The (immutable) Amino acid sequence class represents a list of Protiein
@@ -20,17 +20,17 @@ import bio.sequence
   * @see GappedSequence
   * @see IUPACSequence
   */
-class Sequence(aaList: List[AminoAcid], attributeList: List[Attribute])
-    extends sequence.Sequence[AminoAcid](aaList, attributeList) {
+class Sequence(aaList: List[AminoAcidCode], attributeList: List[Attribute])
+    extends sequence.Sequence[AminoAcidCode](aaList, attributeList) {
 
   type SequenceType = Sequence
 
-  def create(seqList: List[AminoAcid], attributeList: List[Attribute]) =
+  def create(seqList: List[AminoAcidCode], attributeList: List[Attribute]) =
     new Sequence(seqList, attributeList)
 }
 
 object Sequence {
-  def apply(list: List[AminoAcid]) =
+  def apply(list: List[AminoAcidCode]) =
     new Sequence(AminoAcidConvert.fromList(list), Nil)
 
   def apply(str: String) = new Sequence(AminoAcidConvert.fromString(str), Nil)

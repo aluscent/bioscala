@@ -3,7 +3,7 @@ package bio.sequence.Protein
 import bio.nucleotide.DNA
 import bio.sequence.DNA.{ToGappedDNA, ToGappedSequence}
 import bio.chemistry.Protein.Gap
-import bio.chemistry.Protein.{AminoAcid, Codon, CodonGap, CodonSymbol}
+import bio.chemistry.Protein.{AminoAcidCode, Codon, CodonGap, CodonSymbol}
 
 object GappedDNAtoCodon {
   /** Return the Codons */
@@ -32,7 +32,7 @@ object GappedDNAtoCodon {
       // println(seq3)
       aa match {
         case Gap           => CodonGap
-        case aa: AminoAcid => Codon(aa, seq3)
+        case aa: AminoAcidCode => Codon(aa, seq3)
         case _             => throw new IllegalArgumentException("Unexpected value " + aa)
       }
     }
